@@ -5,12 +5,29 @@ import styles from '../styles/Home.module.css'
 export default function Home({result}) {
   return (
     <div className={styles.container}>
-      <div>
+      <table className='border'>
+        <thead>
+          <tr>
+            <th>Faction</th>
           {result.data.map((faction)=>{
-          return <li>{faction.attributes.name}</li>
+          return <th key={faction.id} className='p-2 border'>{faction.attributes.name}</th>
         })}   
         {console.log(result)}
-      </div>
+        {console.log(result.atrributes)}
+            </tr>
+        </thead>
+        <tbody className='ml-5 border'>
+          {result.data.map((faction)=>{
+          return <tr className='border' key={faction.id}>
+              <td className='border'>{faction.attributes.name}</td>
+              {/* {result.data.map((faction2)=>{
+                return <td className='border'>{faction2.atrributes.name}</td> //Fix this such that we can output the win/loss percentage is displayed by the fucking browser. 
+              })} */}
+            </tr>
+        })}   
+          
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -34,3 +51,5 @@ export async function getServerSideProps(context) {
     props: { result }, // will be passed to the page component as props
   }
 }
+
+
